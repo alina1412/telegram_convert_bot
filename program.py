@@ -2,10 +2,6 @@ import os
 from tb_message_queue import TbMessageQueue
 from tb_message_processor import TbMessageProcessor
 
-"""
-- TODO: automated Update-object validation from
-    TbAPI getUpdates method
-"""
 
 TOKEN = os.environ.get("bot_token")
 print(TOKEN)
