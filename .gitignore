@@ -2,3 +2,4 @@
 __pycache__/*
 .vscode/*
 example_files/*
+bot_venv/
