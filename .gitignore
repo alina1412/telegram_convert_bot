@@ -1,5 +1,9 @@
 .env
-__pycache__/*
+**/__pycache__/*
 .vscode/*
-example_files/*
-bot_venv/
+tmp/*
+.venv/
+.mypy_cache/*
+.pytest_cache
+htmlcov/*
+.coverage

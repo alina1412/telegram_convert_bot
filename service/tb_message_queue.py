@@ -1,5 +1,5 @@
-from telebot_api import TelebotApi
-import config as conf
+from service import config as conf
+from service.telebot_api import TelebotApi
 
 
 class TbMessageQueue:
@@ -9,7 +9,8 @@ class TbMessageQueue:
 
     def get_new_messages(self):
         messages = self.telebot_api.getUpdates(
-            offset=self.offset, timeout=conf.GET_UPDATES_TIMEOUT_SEC)
+            offset=self.offset, timeout=conf.GET_UPDATES_TIMEOUT_SEC
+        )
         if messages:
             self.offset = messages[-1]["update_id"] + 1
 

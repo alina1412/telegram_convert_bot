@@ -1,6 +1,6 @@
 from os import environ
-from tb_message_queue import TbMessageQueue
-from tb_message_processor import TbMessageProcessor
+from service.tb_message_queue import TbMessageQueue
+from service.tb_message_processor import TbMessageProcessor
 
 
 TOKEN = environ.get("bot_token")
