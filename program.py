@@ -1,10 +1,10 @@
-import os
+from os import environ
 from tb_message_queue import TbMessageQueue
 from tb_message_processor import TbMessageProcessor
 
 
-TOKEN = os.environ.get("bot_token")
-print(TOKEN)
+TOKEN = environ.get("bot_token")
+# print(TOKEN)
 
 
 def main():
