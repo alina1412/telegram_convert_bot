@@ -1,7 +1,7 @@
 import asyncio
 from os import environ
-from service.tb_message_queue import TbMessageQueue
-from service.tb_message_processor import TbMessageProcessor
+from .tb_message_queue import TbMessageQueue
+from .tb_message_processor import TbMessageProcessor
 
 
 TOKEN = environ.get("bot_token")
@@ -20,6 +20,8 @@ if __name__ == "__main__":
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
     try:
+        print("started...")
         asyncio.run(main())
     except KeyboardInterrupt:
+        print("wait...")
         pass
