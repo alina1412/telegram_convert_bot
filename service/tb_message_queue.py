@@ -7,8 +7,8 @@ class TbMessageQueue:
         self.telebot_api = TelebotApi(token)
         self.offset = 0
 
-    def get_new_messages(self):
-        messages = self.telebot_api.getUpdates(
+    async def get_new_messages(self):
+        messages = await self.telebot_api.getUpdates(
             offset=self.offset, timeout=conf.GET_UPDATES_TIMEOUT_SEC
         )
         if messages:
