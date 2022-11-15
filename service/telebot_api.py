@@ -38,7 +38,7 @@ class TelebotApi:
         return wrapper
 
     async def download_document(self, document, destination):
-        file = self.getFile(file_id=document["file_id"])
+        file = await self.getFile(file_id=document["file_id"])
         file_path = file["file_path"]
         file_name = document["file_name"]
         url = f"https://api.telegram.org/file/bot{self.token}/{file_path}"
