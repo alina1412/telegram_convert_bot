@@ -23,7 +23,7 @@ Later it's getting to be refactored for the `async` version.
 
 To run a project locally it's needed:
 - put token for telegram in .env
-- have lame.exe and balcon.exe installed and its paths in .env
+- have lame.exe and balcon.exe installed and its paths in .env (works on Windows)
 - create a virtual environment (`poetry install` or `python -m venv .venv` and install requirements.txt)
 - run `python -m service` 
 
