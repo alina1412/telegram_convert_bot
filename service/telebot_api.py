@@ -1,7 +1,9 @@
-import urllib.request
+
 from dataclasses import dataclass
 from io import TextIOWrapper
 from os import path
+import aiofiles
+import aiohttp
 
 import requests
 
@@ -26,24 +28,36 @@ class TelebotApi:
                 files.append((name, (value.name, value.file, value.media_type)))
             else:
                 params[name] = value
+
         response = requests.post(url, params, files=files)
         response_json = response.json()
         if response_json["ok"]:
             return response_json["result"]
 
     def __getattr__(self, method_name):
-        def wrapper(*args, **kwargs):
-            return self._call(method_name, *args, **kwargs)
-
+        def wrapper(**kwargs):
+            return self._call(method_name, **kwargs)
         return wrapper
 
-    async def download_document(self, document, destination):
+    async def get_chunks_of_download(self, url, chunk_size=65536):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as resp:
+                async for chunk in resp.content.iter_chunked(chunk_size):
+                    yield chunk
+
+    async def get_file_path(self, document):
         file = await self.getFile(file_id=document["file_id"])
-        file_path = file["file_path"]
-        file_name = document["file_name"]
-        url = f"https://api.telegram.org/file/bot{self.token}/{file_path}"
-        with urllib.request.urlopen(url) as f:
-            dest_with_name = path.join(destination, file_name)
-            with open(dest_with_name, "wb") as output:
-                output.write(f.read())
-                return dest_with_name
+        return file["file_path"]
+
+    def get_file_download_url(self, file_path):
+        return f"https://api.telegram.org/file/bot{self.token}/{file_path}"
+
+    async def download_document(self, document, destination):
+        file_path = await self.get_file_path(document)
+        url = self.get_file_download_url(file_path)
+        dest_with_name = path.join(destination, document["file_name"])
+
+        async with aiofiles.open(dest_with_name, 'wb') as download_file:
+            async for chunk in self.get_chunks_of_download(url):
+                await download_file.write(chunk)
+        return dest_with_name

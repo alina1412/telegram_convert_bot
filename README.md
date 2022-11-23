@@ -6,6 +6,10 @@
 
 The bot is made for converting messages and txt files from a user to mp3.
 
+How it worked (video):
+
+[![Watch the video](https://img.youtube.com/vi/BbCudYB6uYQ/2.jpg)](https://youtu.be/BbCudYB6uYQ)
+ 
 ![pic](https://user-images.githubusercontent.com/8655093/201859016-d614ed04-b331-407e-bd58-acb7bbe6347f.jpg)
 
 
@@ -23,7 +27,7 @@ Later it's getting to be refactored for the `async` version.
 
 To run a project locally it's needed:
 - put token for telegram in .env
-- have lame.exe and balcon.exe installed and its paths in .env (works on Windows)
+- have lame.exe and balcon.exe (http://www.cross-plus-a.com/bconsole.htm) installed and its paths in .env (works on Windows)
 - create a virtual environment (`poetry install` or `python -m venv .venv` and install requirements.txt)
 - run `python -m service` 
 
